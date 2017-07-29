@@ -29,22 +29,17 @@ public class BookingController {
     // using java 8 Streams filter() and collect()
     @RequestMapping(value = "/affordable/{price}", method = RequestMethod.GET)
     public List<HotelBooking> getAffordable(@PathVariable double price){
-        /*return bookings.stream()
-                .filter(x -> x.getPricePerNight() <= price)
-                .collect(Collectors.toList());*/
         return  bookingRepository.findFirstByPricePerNightIsLessThan(price);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public List<HotelBooking> create(@RequestBody HotelBooking hotelBooking){
-       /* bookings.add(hotelBooking);
-        return bookings;*/
        bookingRepository.save(hotelBooking);
 
        return bookingRepository.findAll();
     }
 
-    @RequestMapping(value = "/delete{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public List<HotelBooking> remove(@PathVariable long id){
         bookingRepository.delete(id);
 
