@@ -18,6 +18,8 @@ public class ViewController {
 
         model.addAttribute("datetime", new Date());
         model.addAttribute("username", "Romanian Coder");
+        //model.addAttribute("mode", "development");
+        model.addAttribute("mode", "production");
 
         return "index";
     }
