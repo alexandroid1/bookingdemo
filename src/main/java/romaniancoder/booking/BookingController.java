@@ -27,30 +27,28 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    @ApiMethod(description = "Get all hotel booking from the database")
+    @ApiMethod(description = "Get all hotel bookings from the database")
     public List<HotelBooking> getAll(){
         return bookingRepository.findAll();
     }
 
-    // using java 8 Streams filter() and collect()
     @RequestMapping(value = "/affordable/{price}", method = RequestMethod.GET)
-    @ApiMethod(description = "Get all hotel bookings where the price per night " +
-            "is less than the provided value")
-    public List<HotelBooking> getAffordable(@ApiPathParam(name = "price")  @PathVariable double price){
-        return  bookingRepository.findFirstByPricePerNightIsLessThan(price);
+    @ApiMethod(description = "Get all hotel bookings where the price per night is less than the provided value")
+    public List<HotelBooking> getAffordable(@ApiPathParam(name = "price") @PathVariable double price){
+        return bookingRepository.findFirstByPricePerNightIsLessThan(price);
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     @ApiMethod(description = "Create a hotel booking and save it to the database")
     public List<HotelBooking> create(@RequestBody HotelBooking hotelBooking){
-       bookingRepository.save(hotelBooking);
+        bookingRepository.save(hotelBooking);
 
-       return bookingRepository.findAll();
+        return bookingRepository.findAll();
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    @ApiMethod(description = "Remove the hotel booking with the provided ID")
-    public List<HotelBooking> remove(@ApiPathParam(name="id")@PathVariable long id){
+    @ApiMethod(description = "Remove the hotel booking with the provided ID from the database")
+    public List<HotelBooking> remove(@ApiPathParam(name = "id") @PathVariable long id){
         bookingRepository.delete(id);
 
         return bookingRepository.findAll();
