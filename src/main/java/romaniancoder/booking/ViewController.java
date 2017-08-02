@@ -22,9 +22,8 @@ public class ViewController {
     public String index(Model model){
 
         model.addAttribute("datetime", new Date());
-        model.addAttribute("username", "Romanian Coder");
-        //model.addAttribute("mode", "development");
-        model.addAttribute("mode", "production");
+        model.addAttribute("username", "John");
+        model.addAttribute("mode", appMode);
 
         return "index";
     }
